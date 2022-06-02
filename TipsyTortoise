@@ -1,0 +1,21 @@
+var output = {
+    rewards: []
+}
+
+if (ikContext.account.isDraft == true) {
+
+var sku = "999" // you can customize this script by changing the SKU
+var itemPresent = ikContext.account.transactionLines.find(function(line) {
+    return line.itemSku===sku;
+});
+
+if (!itemPresent) {
+    output.rewards.unshift({
+        type: "ADD",
+        sku: sku,
+        insertionPhase:0
+    })
+}
+}
+
+JSON.stringify(output)
